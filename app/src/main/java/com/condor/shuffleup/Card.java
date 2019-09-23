@@ -1,13 +1,15 @@
 package com.condor.shuffleup;
 
+import android.graphics.drawable.Drawable;
+
 public class Card implements Comparable<Card> {
 
-    public final static int HEARTS = 100,
+    private final static int HEARTS = 100,
             DIAMONDS = 200,
             SPADES = 300,
             CLUBS = 400;
 
-    public final static int JACK = 11,
+    private final static int JACK = 11,
             QUEEN = 12,
             KING = 13,
             ACE = 14;
@@ -54,6 +56,7 @@ public class Card implements Comparable<Card> {
         }
         return "Error";
     }
+
 
     @Override
     public int compareTo(Card card) {

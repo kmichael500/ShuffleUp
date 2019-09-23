@@ -10,7 +10,7 @@ public class CardDeck {
 
     public CardDeck(){
         for (int suit = 100; suit<=400; suit += 100){
-            for (int cardVal = 1; cardVal <= 14; cardVal++){
+            for (int cardVal = 2; cardVal <= 14; cardVal++){
                 deck.add(new Card(suit, cardVal));
             }
         }

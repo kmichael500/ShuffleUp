@@ -28,5 +28,20 @@ public class Player {
         return hand;
     }
 
+    public Card playCard(Card card){
+        hand.remove(card);
+        return card;
+    }
+    public boolean hasSuit(int currentSuit){
+        //determine if the players hand has the current suit
+        //false by default
+        boolean hasCurrentSuit = false;
+        for(int i = 0; i < hand.size(); i++){
+            if(hand.get(i).getSuit() == currentSuit){
+                hasCurrentSuit = true;
+            }
+        }
+        return hasCurrentSuit;
+    }
 
 }

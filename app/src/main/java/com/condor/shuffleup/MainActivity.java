@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         GridView cardListView = (GridView) findViewById(R.id.cardList);
-
+        TextView topstack = (TextView) findViewById(R.id.cardPile);
         ArrayList<String> cardStringList = new ArrayList<>();
 
         ArrayAdapter<String> cardListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cardStringList);
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         cardListView.setAdapter(cardListAdapter);
 
-
+        //create the deck at the start
         CardDeck deck = new CardDeck();
 
         Card card;
@@ -47,8 +48,21 @@ public class MainActivity extends AppCompatActivity {
 
         cardListAdapter.notifyDataSetChanged();
 
+        //add all players here
+        ArrayList<Player> playerList = new ArrayList<>();
+        playerList.add(player1);
 
-        String hello = "HI";
+        //WE NEED TO GET A CARD CHOICE FROM LIST:
+        //just a temp for test
+        Card choice = new Card(100,12);
+
+        Hearts game = new Hearts(1,0, playerList);
+        game.setCurrentChoice(choice);
+
+        game.playGame();
+        //update the top of stack
+        topstack.setText(game.gettopStack().cardString());
+        cardListAdapter.notifyDataSetChanged();
 
 
 

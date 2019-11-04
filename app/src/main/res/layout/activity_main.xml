@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <GridView
         android:id="@+id/cardList"
         android:layout_width="411dp"
@@ -14,9 +15,8 @@
         android:numColumns="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <TextView
         android:id="@+id/textView"
@@ -43,11 +43,11 @@
 
     <TextView
         android:id="@+id/current_suit"
-        android:layout_width="134dp"
-        android:layout_height="24dp"
+        android:layout_width="136dp"
+        android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="452dp"
+        android:layout_marginBottom="456dp"
 
         android:text=" "
         app:layout_constraintBottom_toBottomOf="parent"

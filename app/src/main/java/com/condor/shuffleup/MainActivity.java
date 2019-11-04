@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         final GridView cardListView = (GridView) findViewById(R.id.cardList);
         final TextView topstack = (TextView) findViewById(R.id.cardPile);
-        TextView cur_suit = (TextView) findViewById(R.id.current_suit);
+        final TextView cur_suit = (TextView) findViewById(R.id.current_suit);
         final ArrayList<String> cardStringList = new ArrayList<>();
 
         final ArrayAdapter<String> cardListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cardStringList);
@@ -56,32 +56,33 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Player> playerList = new ArrayList<>();
         playerList.add(player1);
 
-        //WE NEED TO GET A CARD CHOICE FROM LIST:
-        //just a temp for test
-
-
-
+        //create a game instantiation
         final Hearts game = new Hearts(1,0, playerList);
         game.setCurrentChoice(choice);
 
-        game.playGame();
+        //game.playGame();
         //update the top of stack
 
         cur_suit.setText("Current Suit: " + Integer.toString(game.getSuit()));
         cardListAdapter.notifyDataSetChanged();
 
 
-        //event listener
+        //event listener for move selection
         cardListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
                 Card newchoice = player1.getAt(position);
+                if(game.getTurnNumber() == 0){
+                    cur_suit.setText("Current Suit: " + newchoice.getSuitString());
+                }
                 System.out.println("WOOOOOT : " + newchoice.cardString());
                 game.Turn(newchoice ,player1);
                 topstack.setText(game.gettopStack().cardString());
                 cardStringList.remove(position);
                 cardListAdapter.notifyDataSetChanged();
+
+
 
             }
         });

@@ -11,6 +11,7 @@ public class Hearts {
     private ArrayList<Card> pile = new ArrayList<>();       //card pile
     private int gamemode;
 
+
     //set up the game
     Hearts(int playerCount, int mode, ArrayList<Player> playerlist){
         players = (ArrayList) playerlist.clone();
@@ -43,9 +44,14 @@ public class Hearts {
 
     }
 
-    private void Turn(Card choice, Player curplayer){
+    public void Turn(Card choice, Player curplayer){
         //remove card from hand and add it to the pile
+        if(turnNumber == 0){
+            suit = choice.getSuit();
+        }
         pile.add(curplayer.playCard(choice));
+        turnNumber++;
     }
+
 
 }

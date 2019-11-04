@@ -3,6 +3,8 @@ package com.condor.shuffleup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -10,27 +12,28 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    Card choice = new Card(100,12);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GridView cardListView = (GridView) findViewById(R.id.cardList);
-        TextView topstack = (TextView) findViewById(R.id.cardPile);
-        ArrayList<String> cardStringList = new ArrayList<>();
+        final GridView cardListView = (GridView) findViewById(R.id.cardList);
+        final TextView topstack = (TextView) findViewById(R.id.cardPile);
+        TextView cur_suit = (TextView) findViewById(R.id.current_suit);
+        final ArrayList<String> cardStringList = new ArrayList<>();
 
-        ArrayAdapter<String> cardListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cardStringList);
+        final ArrayAdapter<String> cardListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cardStringList);
         cardListView.setAdapter(cardListAdapter);
 
-        cardListView.setAdapter(cardListAdapter);
+
 
         //create the deck at the start
         CardDeck deck = new CardDeck();
 
         Card card;
 
-        Player player1 = new Player();
+        final Player player1 = new Player();
 
         deck.shuffle();
 
@@ -48,25 +51,41 @@ public class MainActivity extends AppCompatActivity {
 
         cardListAdapter.notifyDataSetChanged();
 
+
         //add all players here
         ArrayList<Player> playerList = new ArrayList<>();
         playerList.add(player1);
 
         //WE NEED TO GET A CARD CHOICE FROM LIST:
         //just a temp for test
-        Card choice = new Card(100,12);
 
-        Hearts game = new Hearts(1,0, playerList);
+
+
+        final Hearts game = new Hearts(1,0, playerList);
         game.setCurrentChoice(choice);
 
         game.playGame();
         //update the top of stack
-        topstack.setText(game.gettopStack().cardString());
+
+        cur_suit.setText("Current Suit: " + Integer.toString(game.getSuit()));
         cardListAdapter.notifyDataSetChanged();
 
 
+        //event listener
+        cardListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
 
+                Card newchoice = player1.getAt(position);
+                System.out.println("WOOOOOT : " + newchoice.cardString());
+                game.Turn(newchoice ,player1);
+                topstack.setText(game.gettopStack().cardString());
+                cardStringList.remove(position);
+                cardListAdapter.notifyDataSetChanged();
 
+            }
+        });
 
     }
+
 }

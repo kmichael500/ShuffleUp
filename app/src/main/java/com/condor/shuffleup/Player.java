@@ -12,7 +12,9 @@ public class Player {
 
     private int cardCount = 0;
 
-
+    public Card getAt(int index){
+        return hand.get(index);
+    }
 
     public void sortHand(){
         Collections.sort(hand);
@@ -28,5 +30,22 @@ public class Player {
         return hand;
     }
 
+    //for use in the hearts class only
+    public Card playCard(Card choice){
+        hand.remove(choice);
+
+        return choice;
+    }
+    public boolean hasSuit(int currentSuit){
+        //determine if the players hand has the current suit
+        //false by default
+        boolean hasCurrentSuit = false;
+        for(int i = 0; i < hand.size(); i++){
+            if(hand.get(i).getSuit() == currentSuit){
+                hasCurrentSuit = true;
+            }
+        }
+        return hasCurrentSuit;
+    }
 
 }

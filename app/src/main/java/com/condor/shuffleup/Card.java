@@ -24,10 +24,16 @@ public class Card implements Comparable<Card> {
     }
 
 
-    public int getSuit() {
-        return suit;
+    public int getSuit() { return suit; }
+    public String getSuitString(){
+        switch (suit){
+            case HEARTS: return "Hearts";
+            case SPADES: return "Spades";
+            case CLUBS: return "Clubs";
+            case DIAMONDS: return "Diamonds";
+        }
+        return "Error";
     }
-
     public int getValue(){
         return value;
     }

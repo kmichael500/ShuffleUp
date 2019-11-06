@@ -11,6 +11,7 @@ public class Player {
     private ArrayList<Card> hand = new ArrayList<>();
 
     private int cardCount = 0;
+    private int score = 0;
 
     public Card getAt(int index){
         return hand.get(index);
@@ -28,6 +29,21 @@ public class Player {
     public ArrayList<Card> getHand(){
 
         return hand;
+    }
+
+    public int getScore(){
+        return score;
+    }
+    public void addPoints(int points){
+        score += points;
+    }
+
+    public ArrayList<String> handToStringList(){
+        ArrayList<String> handToStringList = new ArrayList<>();
+        for (int i = 0; i<hand.size(); i++){
+            handToStringList.add(hand.get(i).cardString());
+        }
+        return handToStringList;
     }
 
     //for use in the hearts class only

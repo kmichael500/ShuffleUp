@@ -10,8 +10,9 @@
 
     <GridView
         android:id="@+id/cardList"
-        android:layout_width="411dp"
-        android:layout_height="178dp"
+        android:layout_width="414dp"
+        android:layout_height="374dp"
+        android:layout_marginBottom="16dp"
         android:numColumns="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,50 +20,70 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="308dp"
-        android:layout_marginRight="308dp"
-        android:layout_marginBottom="204dp"
-        android:text="Current Hand"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/cardPile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/playerLabel"
+        android:layout_width="287dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="396dp"
-        android:text=""
+        android:gravity="center"
+        android:text="Current Hand1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.298"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/current_suit"
-        android:layout_width="136dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="456dp"
+        android:layout_width="144dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="564dp"
 
         android:text=" "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="192dp"
-        android:layout_marginLeft="192dp"
-        android:layout_marginBottom="432dp"
+        android:id="@+id/roundInfo"
+        android:layout_width="290dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="544dp"
+        android:gravity="center_horizontal"
         android:text="Pile"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <GridView
+        android:id="@+id/cardPile"
+        android:layout_width="379dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:numColumns="2"
+        app:layout_constraintBottom_toTopOf="@+id/cardList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundInfo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <GridView
+        android:id="@+id/playerScores"
+        android:layout_width="397dp"
+        android:layout_height="125dp"
+        android:numColumns="2"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
     />
 
 

@@ -12,81 +12,123 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    Card choice = new Card(100,12);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final GridView cardListView = (GridView) findViewById(R.id.cardList);
-        final TextView topstack = (TextView) findViewById(R.id.cardPile);
-        final TextView cur_suit = (TextView) findViewById(R.id.current_suit);
+        //displays the cards in a players hand
+        final GridView cardListView = findViewById(R.id.cardList);
         final ArrayList<String> cardStringList = new ArrayList<>();
-
-        final ArrayAdapter<String> cardListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cardStringList);
+        final ArrayAdapter<String> cardListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cardStringList);
         cardListView.setAdapter(cardListAdapter);
 
 
-
-        //create the deck at the start
-        CardDeck deck = new CardDeck();
-
-        Card card;
-
-        final Player player1 = new Player();
-
-        deck.shuffle();
-
-        for ( int i = 0; i<13; i++){
-            player1.addCard(deck.dealCard());
-        }
-
-        player1.sortHand();
-
-        ArrayList<Card> player1Hand = player1.getHand();
-
-        for (int i = 0; i<player1Hand.size(); i++){
-            cardStringList.add(player1Hand.get(i).cardString());
-        }
-
-        cardListAdapter.notifyDataSetChanged();
+        //displays user scores
+        final GridView playerScoreGridView = findViewById(R.id.playerScores);
+        final ArrayList<String> playerScoreStringList = new ArrayList<>();
+        final ArrayAdapter<String> playerScoreArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, playerScoreStringList);
+        playerScoreGridView.setAdapter(playerScoreArrayAdapter);
 
 
-        //add all players here
-        ArrayList<Player> playerList = new ArrayList<>();
-        playerList.add(player1);
+        //Displays the pile (cards played so far)
+        final GridView pile = findViewById(R.id.cardPile);
+        final ArrayList<String> PileList = new ArrayList<>();
+        final ArrayAdapter<String> pileListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, PileList);
+        pile.setAdapter(pileListAdapter);
+
+        //Labels on screen
+        final TextView cur_suit = findViewById(R.id.current_suit);   //displays current suit
+        final TextView roundInfo = findViewById(R.id.roundInfo);     //Displays round info
+        final TextView playerLabel = findViewById(R.id.playerLabel); //Displays Player number
+
+
 
         //create a game instantiation
-        final Hearts game = new Hearts(1,0, playerList);
-        game.setCurrentChoice(choice);
-
-        //game.playGame();
-        //update the top of stack
-
-        cur_suit.setText("Current Suit: " + Integer.toString(game.getSuit()));
-        cardListAdapter.notifyDataSetChanged();
+        final Hearts game = new Hearts(4,0, 15);
 
 
-        //event listener for move selection
+        //Refreshes the screen
+        refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
+                playerScoreArrayAdapter, cardListAdapter, pileListAdapter);
+
+
+
+        // Event listener
+        // Refreshes the screen when a new pile is created
+        game.setOnNewPileChangeListener(new OnNewPileListener() {
+            @Override
+            public void onNewPileChange(boolean newValue) {
+                System.out.println("NEW PILE CHANGE");
+                refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
+                        playerScoreArrayAdapter, cardListAdapter, pileListAdapter);
+            }
+        });
+
+
+        //When a player clicks a card, it sends that choice to the hearts game class
         cardListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-                Card newchoice = player1.getAt(position);
-                if(game.getTurnNumber() == 0){
-                    cur_suit.setText("Current Suit: " + newchoice.getSuitString());
-                }
-                System.out.println("WOOOOOT : " + newchoice.cardString());
-                game.Turn(newchoice ,player1);
-                topstack.setText(game.gettopStack().cardString());
-                cardStringList.remove(position);
-                cardListAdapter.notifyDataSetChanged();
+                //Player's choice
+                Card newChoice = game.getCurrentPlayer().getAt(position);
 
+                //sends the card to the game
+                game.PlayCard(newChoice);
 
-
+                //refreshes screen
+                refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
+                        playerScoreArrayAdapter, cardListAdapter, pileListAdapter);
             }
         });
 
+
+
     }
+
+    //There has to be a better way to do this, but I didn't have time to figure it out.
+    //Refreshes the screen
+    public void refreshScreen(Hearts game, TextView cur_suit, TextView playerLabel, TextView pileText, ArrayList<String> cardStringList,
+                              ArrayList<String> pileList, ArrayList<String> playerScoreStringList,
+                              ArrayAdapter<String> playerScoreArrayAdapter, ArrayAdapter<String> cardListAdapter,
+                              ArrayAdapter<String> pileListAdapter){
+
+        //Sets suit
+        cur_suit.setText(game.getSuitString());
+
+        //sets round info
+        pileText.setText(game.getRoundInfo());
+
+        //Display the current player
+        playerLabel.setText("Player's " + (game.getPlayerNumber()+1) + " Hand");
+
+
+        //Displays the current player's hand
+        cardStringList.clear();
+        for (int i = 0; i<game.getCurrentPlayer().getHand().size(); i++){
+            cardStringList.add(game.getCurrentPlayer().getHand().get(i).cardString());
+        }
+
+        //Displays the pile (cards played so far)
+        pileList.clear();
+        for (int i = 0; i< game.getPile().size(); i++){
+            pileList.add(game.getPile().get(i).cardString());
+        }
+
+        //Displays the players scores
+        playerScoreStringList.clear();
+        for (int i = 0; i< game.getNumberOfPlayers(); i++){
+            playerScoreStringList.add("Player " + (i+1) + ": " + game.getPlayers().get(i).getScore());
+        }
+
+        //Notifies the adapters of data change
+        playerScoreArrayAdapter.notifyDataSetChanged();
+        cardListAdapter.notifyDataSetChanged();
+        pileListAdapter.notifyDataSetChanged();
+
+    }
+
+
 
 }

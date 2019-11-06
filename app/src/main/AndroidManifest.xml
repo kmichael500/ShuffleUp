@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".HeartsLocalActivity"></activity>
+        <activity android:name=".StartPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

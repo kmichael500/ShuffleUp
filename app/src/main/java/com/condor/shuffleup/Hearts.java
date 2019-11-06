@@ -176,8 +176,6 @@ public class Hearts {
         players.get(player).addPoints(score);
         startPlayer = player;
         currentPlayer = startPlayer;
-
-
     }
 
     //Sets up a new round

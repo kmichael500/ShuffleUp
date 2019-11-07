@@ -12,6 +12,15 @@ public class Player {
 
     private int cardCount = 0;
     private int score = 0;
+    private String playerName;
+
+    public Player(String playerName){
+        this.playerName = playerName;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
 
     public Card getAt(int index){
         return hand.get(index);

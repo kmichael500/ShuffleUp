@@ -7,18 +7,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
 
 import java.util.ArrayList;
 
 public class HeartsLocalActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hearts_local);
-
 
         //displays the cards in a players hand
         final GridView cardListView = findViewById(R.id.cardList);
@@ -46,10 +47,17 @@ public class HeartsLocalActivity extends AppCompatActivity {
         final TextView playerLabel = findViewById(R.id.playerLabel); //Displays Player number
 
 
-
         //create a game instantiation
         final Hearts game = new Hearts(4,0, 15);
 
+        for(int i=0;i<10;i++)
+        {
+            //create imageview here and setbg
+            ImageView imageView = new ImageView(this);
+            imageView.setImageResource(R.drawable.ace_of_diamonds);
+            ((LinearLayout) findViewById(R.id.imgcontainer)).addView(
+                    imageView);
+        }
 
         //Refreshes the screen
         refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,

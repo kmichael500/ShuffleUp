@@ -101,32 +101,9 @@
 
             <LinearLayout
                 android:id="@+id/imgcontainer"
-                android:layout_width="127dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="127dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/ace_of_spades" />
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="127dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/three_of_clubs" />
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="127dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/jack_of_diamonds" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="127dp"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/two_of_hearts" />
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout><![CDATA[

@@ -1,7 +1,7 @@
 package com.condor.shuffleup;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,8 +10,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-
 import java.util.ArrayList;
 
 public class HeartsLocalActivity extends AppCompatActivity {
@@ -50,11 +48,14 @@ public class HeartsLocalActivity extends AppCompatActivity {
         //create a game instantiation
         final Hearts game = new Hearts(4,0, 15);
 
-        for(int i=0;i<10;i++)
+        for(int i=0;i<game.getCurrentPlayer().getHand().size();i++)
         {
-            //create imageview here and setbg
+            String uri = "@drawable/" + game.getCurrentPlayer().getHand().get(i).cardString();  // where myresource (without the extension) is the file
+            int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+
             ImageView imageView = new ImageView(this);
-            imageView.setImageResource(R.drawable.ace_of_diamonds);
+            Drawable res = getResources().getDrawable(imageResource);
+            imageView.setImageDrawable(res);
             ((LinearLayout) findViewById(R.id.imgcontainer)).addView(
                     imageView);
         }
@@ -120,6 +121,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
         for (int i = 0; i<game.getCurrentPlayer().getHand().size(); i++){
             cardStringList.add(game.getCurrentPlayer().getHand().get(i).cardString());
         }
+
 
         //Displays the pile (cards played so far)
         pileList.clear();

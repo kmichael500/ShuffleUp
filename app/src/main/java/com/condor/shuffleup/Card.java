@@ -44,10 +44,10 @@ public class Card implements Comparable<Card> {
         }
         else{
             switch (value){
-                case JACK: return "Jack";
-                case QUEEN: return "Queen";
-                case KING: return "King";
-                case ACE: return "Ace";
+                case JACK: return "j";
+                case QUEEN: return "q";
+                case KING: return "k";
+                case ACE: return "a";
             }
             return "Error";
         }
@@ -55,10 +55,10 @@ public class Card implements Comparable<Card> {
 
     public String cardString(){
         switch (suit){
-            case HEARTS: return "Hearts: " + getValueString();
-            case DIAMONDS: return "Diamonds: " + getValueString();
-            case SPADES: return "Spades: " + getValueString();
-            case CLUBS: return "Clubs: " + getValueString();
+            case HEARTS: return "h" + getValueString();
+            case DIAMONDS: return "d" + getValueString();
+            case SPADES: return "s" + getValueString();
+            case CLUBS: return "c" + getValueString();
         }
         return "Error";
     }

@@ -41,8 +41,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginBottom="564dp"
-
+        android:layout_marginBottom="548dp"
         android:text=" "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -55,7 +54,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="544dp"
+        android:layout_marginBottom="525dp"
         android:gravity="center_horizontal"
         android:text="Pile"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,13 +78,21 @@
 
     <GridView
         android:id="@+id/playerScores"
-        android:layout_width="397dp"
+        android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:numColumns="2"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
-    />
+        android:layout_marginTop="0dp"
+        android:numColumns="2" />
 
+
+    <Button
+        android:id="@+id/nextPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Show next hand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

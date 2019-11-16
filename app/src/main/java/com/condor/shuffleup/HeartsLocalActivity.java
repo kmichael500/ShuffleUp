@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,9 @@ public class HeartsLocalActivity extends AppCompatActivity {
         final TextView roundInfo = findViewById(R.id.roundInfo);     //Displays round info
         final TextView playerLabel = findViewById(R.id.playerLabel); //Displays Player number
 
+        //Button to control turns
+        final Button nextPlayer = findViewById(R.id.nextPlayer);
+
 
 
         //create a game instantiation
@@ -80,9 +84,22 @@ public class HeartsLocalActivity extends AppCompatActivity {
                 //sends the card to the game
                 game.PlayCard(newChoice);
 
-                //refreshes screen
-                refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
-                        playerScoreArrayAdapter, cardListAdapter, pileListAdapter);
+                //hides the cards until button to show next hand is pressed
+                cardListView.setVisibility(View.GONE);
+
+                //When the next player clicks the button, their hand is shown
+                nextPlayer.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        //shows next player's hand
+                        cardListView.setVisibility(View.VISIBLE);
+
+                        //refreshes screen
+                        refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
+                                playerScoreArrayAdapter, cardListAdapter, pileListAdapter);
+                    }
+                });
             }
         });
 

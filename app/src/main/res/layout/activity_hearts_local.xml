@@ -9,10 +9,9 @@
 
     <GridView
         android:id="@+id/cardList"
-        android:layout_width="414dp"
-        android:layout_height="374dp"
-        android:layout_marginBottom="16dp"
-        android:numColumns="2"
+        android:layout_width="411dp"
+        android:layout_height="183dp"
+        android:numColumns="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,12 +25,12 @@
         android:layout_marginLeft="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="396dp"
+        android:layout_marginBottom="188dp"
         android:gravity="center"
         android:text="Current Hand1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.298"
+        app:layout_constraintHorizontal_bias="0.289"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -80,33 +79,25 @@
         android:id="@+id/playerScores"
         android:layout_width="397dp"
         android:layout_height="125dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="8dp"
         android:numColumns="2"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" >
+        app:layout_constraintBottom_toTopOf="@+id/roundInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
     </GridView><![CDATA[
     />
 
-    ]]>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:id="@+id/layout"
-        android:layout_height="match_parent">
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="183dp"
-            android:layout_gravity="bottom">
 
-            <LinearLayout
-                android:id="@+id/imgcontainer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-            </LinearLayout>
-        </HorizontalScrollView>
-    </LinearLayout><![CDATA[
+
+
 
 
 
@@ -115,6 +106,9 @@
 
 
     />
+
+
+
 
 
 

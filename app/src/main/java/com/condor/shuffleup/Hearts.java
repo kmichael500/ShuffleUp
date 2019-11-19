@@ -225,7 +225,7 @@ public class Hearts {
     }
 
     //Checks if a card is a valid play
-    private boolean isValidPlay(Card choice){
+    protected boolean isValidPlay(Card choice){
 
         //makes sure the two of clubs is played at the beginning of a round
         if (newRound){
@@ -236,6 +236,7 @@ public class Hearts {
             else{
                 return false;
             }
+
         }
 
 

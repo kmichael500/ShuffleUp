@@ -1,5 +1,6 @@
 package com.condor.shuffleup;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +20,7 @@ public class PlayerNameAdapter extends ArrayAdapter<EditText> {
 
     //used to store/retrieve name values
     private HashMap<String, String> textValues = new HashMap<String, String>();
+    private HashMap<String, EditText> editTextObjects = new HashMap<>();
 
     private static final String TAG = "PlayerNameAdapter";
     private Context mContext;
@@ -48,6 +50,11 @@ public class PlayerNameAdapter extends ArrayAdapter<EditText> {
             convertViewWasNull = true;
         }
 
+        //Fade in animation
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+        fadeIn.setDuration(500);
+        fadeIn.start();
+
         EditText editText = view.findViewById(R.id.editText1);
 
         if(convertViewWasNull ){
@@ -59,8 +66,23 @@ public class PlayerNameAdapter extends ArrayAdapter<EditText> {
         editText.setTag("theFirstEditTextAtPos:"+position);
         editText.setHint(getItem(position).getHint().toString());
 
+
         return view;
 
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+
+        ArrayList<ObjectAnimator> animatorArrayList = new ArrayList<>();
+
+
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public Context getContext() {
+        return super.getContext();
     }
 
     //watches for changes to name fields

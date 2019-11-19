@@ -2,7 +2,9 @@ package com.condor.shuffleup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -59,7 +61,12 @@ public class HeartsLocalOptionsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 //clears names if number of players changes
                 nameList.clear();
-                nameAdapter.clear();
+
+
+
+
+
+
 
                 //If string equals "", sets number of players to 0
                 if(!numPlayersInput.getText().toString().equals("")){
@@ -73,6 +80,8 @@ public class HeartsLocalOptionsActivity extends AppCompatActivity {
                     nameList.add(new EditText(HeartsLocalOptionsActivity.this));
                     nameList.get(i).setHint("Player " + (i+1));
                 }
+                nameAdapter.notifyDataSetChanged();
+
             }
         });
 

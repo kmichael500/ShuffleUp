@@ -12,6 +12,6 @@
         android:hint=""
         android:layout_height="60dp"
         android:id="@+id/editText1"
-        android:layout_weight="66.6"/>
+        android:layout_weight="66.6" />
 
 </LinearLayout>

@@ -1,18 +1,11 @@
 package com.condor.shuffleup;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
-
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-
-import android.widget.ImageView;
-
 import android.widget.TextView;
 import java.util.ArrayList;
 
@@ -38,9 +31,9 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
         //Displays the pile (cards played so far)
         final GridView pile = findViewById(R.id.cardPile);
-        final ArrayList<String> PileList = new ArrayList<>();
-        final ArrayAdapter<String> pileListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, PileList);
-        pile.setAdapter(pileListAdapter);
+        final ArrayList<Integer> PileList = new ArrayList<>();
+        final CustomGridAdapterPile pileAdapter = new CustomGridAdapterPile(this, PileList);
+        pile.setAdapter(pileAdapter);
 
         //Labels on screen
         final TextView cur_suit = findViewById(R.id.current_suit);   //displays current suit
@@ -53,7 +46,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
         //Refreshes the screen
         refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
-                playerScoreArrayAdapter, Adapter, pileListAdapter, items);
+                playerScoreArrayAdapter, Adapter, pileAdapter, items);
 
 
 
@@ -64,7 +57,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
             public void onNewPileChange(boolean newValue) {
                 System.out.println("NEW PILE CHANGE");
                 refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
-                        playerScoreArrayAdapter, Adapter, pileListAdapter, items);
+                        playerScoreArrayAdapter, Adapter, pileAdapter, items);
             }
         });
 
@@ -82,7 +75,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
                 //refreshes screen
                 refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
-                        playerScoreArrayAdapter, Adapter, pileListAdapter, items);
+                        playerScoreArrayAdapter, Adapter, pileAdapter, items);
             }
         });
 
@@ -93,9 +86,9 @@ public class HeartsLocalActivity extends AppCompatActivity {
     //There has to be a better way to do this, but I didn't have time to figure it out.
     //Refreshes the screen
     public void refreshScreen(Hearts game, TextView cur_suit, TextView playerLabel, TextView pileText,
-                              ArrayList<String> pileList, ArrayList<String> playerScoreStringList,
+                              ArrayList<Integer> pileList, ArrayList<String> playerScoreStringList,
                               ArrayAdapter<String> playerScoreArrayAdapter, CustomGridAdapter mAdapter,
-                              ArrayAdapter<String> pileListAdapter, ArrayList<Integer> CardList){
+                              CustomGridAdapterPile pileAdapter, ArrayList<Integer> CardList){
 
         //Sets suit
         cur_suit.setText(game.getSuitString());
@@ -116,7 +109,9 @@ public class HeartsLocalActivity extends AppCompatActivity {
         //Displays the pile (cards played so far)
         pileList.clear();
         for (int i = 0; i< game.getPile().size(); i++){
-            pileList.add(game.getPile().get(i).cardString());
+            String uri = "@drawable/" + game.getPile().get(i).cardString();
+            int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+            pileList.add(imageResource);
         }
 
         //Displays the players scores
@@ -128,44 +123,8 @@ public class HeartsLocalActivity extends AppCompatActivity {
         //Notifies the adapters of data change
         playerScoreArrayAdapter.notifyDataSetChanged();
         mAdapter.notifyDataSetChanged();
-        pileListAdapter.notifyDataSetChanged();
+        pileAdapter.notifyDataSetChanged();
 
     }
-    public class CustomGridAdapter extends BaseAdapter {
-        private Activity mContext;
 
-        // Keep all Images in array
-        public ArrayList<Integer> mThumbIds;
-
-        // Constructor
-        public CustomGridAdapter(Activity mainActivity, ArrayList<Integer> items) {
-            this.mContext = mainActivity;
-            this.mThumbIds = items;
-        }
-
-        @Override
-        public int getCount() {
-            return mThumbIds.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mThumbIds;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView = new ImageView(mContext);
-            imageView.setImageResource(mThumbIds.get(position));
-
-            imageView.setLayoutParams(new GridView.LayoutParams(320, 480));
-            return imageView;
-        }
-
-    }
 }

@@ -1,7 +1,6 @@
 package com.condor.shuffleup;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,24 +8,20 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Button;
-
 import java.util.ArrayList;
 
 public class HeartsLocalActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hearts_local);
 
-
-        //displays the cards in a players hand
-        final GridView cardListView = findViewById(R.id.cardList);
-        final ArrayList<String> cardStringList = new ArrayList<>();
-        final ArrayAdapter<String> cardListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cardStringList);
-        cardListView.setAdapter(cardListAdapter);
-
+        // Display Users hand
+        final ArrayList<Integer> items = new ArrayList<>();
+        final  GridView grid = findViewById(R.id.cardList);
+        final CustomGridAdapter Adapter = new CustomGridAdapter(this, items);
+        grid.setAdapter(Adapter);
 
         //displays user scores
         final GridView playerScoreGridView = findViewById(R.id.playerScores);
@@ -37,9 +32,9 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
         //Displays the pile (cards played so far)
         final GridView pile = findViewById(R.id.cardPile);
-        final ArrayList<String> PileList = new ArrayList<>();
-        final ArrayAdapter<String> pileListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, PileList);
-        pile.setAdapter(pileListAdapter);
+        final ArrayList<Integer> PileList = new ArrayList<>();
+        final CustomGridAdapterPile pileAdapter = new CustomGridAdapterPile(this, PileList);
+        pile.setAdapter(pileAdapter);
 
         //Labels on screen
         final TextView cur_suit = findViewById(R.id.current_suit);   //displays current suit
@@ -55,14 +50,12 @@ public class HeartsLocalActivity extends AppCompatActivity {
         int numOfPlayers = getIntent().getExtras().getInt("numOfPlayers");
         int playTilPoints = getIntent().getExtras().getInt("playTilPoints");
 
-
         //create a game instantiation
         final Hearts game = new Hearts(numOfPlayers,0, playTilPoints, playerNames);
 
-
         //Refreshes the screen
-        refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
-                playerScoreArrayAdapter, cardListAdapter, pileListAdapter);
+        refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
+                playerScoreArrayAdapter, Adapter, pileAdapter, items);
 
 
 
@@ -72,14 +65,14 @@ public class HeartsLocalActivity extends AppCompatActivity {
             @Override
             public void onNewPileChange(boolean newValue) {
                 System.out.println("NEW PILE CHANGE");
-                refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
-                        playerScoreArrayAdapter, cardListAdapter, pileListAdapter);
+                refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
+                        playerScoreArrayAdapter, Adapter, pileAdapter, items);
             }
         });
 
 
         //When a player clicks a card, it sends that choice to the hearts game class
-        cardListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
@@ -103,8 +96,8 @@ public class HeartsLocalActivity extends AppCompatActivity {
                         cardListView.setVisibility(View.VISIBLE);
 
                         //refreshes screen
-                        refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
-                                playerScoreArrayAdapter, cardListAdapter, pileListAdapter);
+                        refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
+                        playerScoreArrayAdapter, Adapter, pileAdapter, items);
                     }
                 });
             }
@@ -116,10 +109,10 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
     //There has to be a better way to do this, but I didn't have time to figure it out.
     //Refreshes the screen
-    public void refreshScreen(Hearts game, TextView cur_suit, TextView playerLabel, TextView pileText, ArrayList<String> cardStringList,
-                              ArrayList<String> pileList, ArrayList<String> playerScoreStringList,
-                              ArrayAdapter<String> playerScoreArrayAdapter, ArrayAdapter<String> cardListAdapter,
-                              ArrayAdapter<String> pileListAdapter){
+    public void refreshScreen(Hearts game, TextView cur_suit, TextView playerLabel, TextView pileText,
+                              ArrayList<Integer> pileList, ArrayList<String> playerScoreStringList,
+                              ArrayAdapter<String> playerScoreArrayAdapter, CustomGridAdapter mAdapter,
+                              CustomGridAdapterPile pileAdapter, ArrayList<Integer> CardList){
 
         //Sets suit
         cur_suit.setText(game.getSuitString());
@@ -130,17 +123,19 @@ public class HeartsLocalActivity extends AppCompatActivity {
         //Display the current player
         playerLabel.setText(game.getCurrentPlayer().getPlayerName() + "'s Hand");
 
-
-        //Displays the current player's hand
-        cardStringList.clear();
+        CardList.clear();
         for (int i = 0; i<game.getCurrentPlayer().getHand().size(); i++){
-            cardStringList.add(game.getCurrentPlayer().getHand().get(i).cardString());
+            String uri = "@drawable/" + game.getCurrentPlayer().getHand().get(i).cardString();
+            int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+            CardList.add(imageResource);
         }
 
         //Displays the pile (cards played so far)
         pileList.clear();
         for (int i = 0; i< game.getPile().size(); i++){
-            pileList.add(game.getPile().get(i).cardString());
+            String uri = "@drawable/" + game.getPile().get(i).cardString();
+            int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+            pileList.add(imageResource);
         }
 
         //Displays the players scores
@@ -151,11 +146,9 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
         //Notifies the adapters of data change
         playerScoreArrayAdapter.notifyDataSetChanged();
-        cardListAdapter.notifyDataSetChanged();
-        pileListAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
+        pileAdapter.notifyDataSetChanged();
 
     }
-
-
 
 }

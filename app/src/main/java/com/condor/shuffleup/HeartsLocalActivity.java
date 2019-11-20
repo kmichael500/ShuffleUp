@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class HeartsLocalActivity extends AppCompatActivity {
@@ -84,7 +86,10 @@ public class HeartsLocalActivity extends AppCompatActivity {
                 if(game.isValidPlay(newChoice)){
                     grid.setVisibility(View.GONE);
                     nextPlayer.setVisibility(View.VISIBLE);
+                }else{
+                    Toast.makeText(HeartsLocalActivity.this, "Cannot play this card"  , Toast.LENGTH_LONG).show();
                 }
+
 
                 //When the next player clicks the button, their hand is shown
                 nextPlayer.setOnClickListener(new View.OnClickListener() {

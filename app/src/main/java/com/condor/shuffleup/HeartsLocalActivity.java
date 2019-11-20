@@ -43,7 +43,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
         //Button to control turns
         final Button nextPlayer = findViewById(R.id.nextPlayer);
-
+        nextPlayer.setVisibility(View.GONE);
 
         //gets options for game
         ArrayList<String> playerNames = getIntent().getExtras().getStringArrayList("PlayerNames");
@@ -84,7 +84,8 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
                 //hides the cards until button to show next hand is pressed
                 if(game.isValidPlay(newChoice)){
-                    cardListView.setVisibility(View.GONE);
+                    grid.setVisibility(View.GONE);
+                    nextPlayer.setVisibility(View.VISIBLE);
                 }
 
                 //When the next player clicks the button, their hand is shown
@@ -93,7 +94,8 @@ public class HeartsLocalActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //shows next player's hand
-                        cardListView.setVisibility(View.VISIBLE);
+                        grid.setVisibility(View.VISIBLE);
+                        nextPlayer.setVisibility(View.GONE);
 
                         //refreshes screen
                         refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,

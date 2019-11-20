@@ -50,9 +50,14 @@ public class HeartsLocalActivity extends AppCompatActivity {
         final Button nextPlayer = findViewById(R.id.nextPlayer);
 
 
+        //gets options for game
+        ArrayList<String> playerNames = getIntent().getExtras().getStringArrayList("PlayerNames");
+        int numOfPlayers = getIntent().getExtras().getInt("numOfPlayers");
+        int playTilPoints = getIntent().getExtras().getInt("playTilPoints");
+
 
         //create a game instantiation
-        final Hearts game = new Hearts(4,0, 15);
+        final Hearts game = new Hearts(numOfPlayers,0, playTilPoints, playerNames);
 
 
         //Refreshes the screen
@@ -121,7 +126,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
         pileText.setText(game.getRoundInfo());
 
         //Display the current player
-        playerLabel.setText("Player's " + (game.getPlayerNumber()+1) + " Hand");
+        playerLabel.setText(game.getCurrentPlayer().getPlayerName() + "'s Hand");
 
 
         //Displays the current player's hand
@@ -139,7 +144,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
         //Displays the players scores
         playerScoreStringList.clear();
         for (int i = 0; i< game.getNumberOfPlayers(); i++){
-            playerScoreStringList.add("Player " + (i+1) + ": " + game.getPlayers().get(i).getScore());
+            playerScoreStringList.add(game.getPlayers().get(i).getPlayerName() + ": " + game.getPlayers().get(i).getScore());
         }
 
         //Notifies the adapters of data change

@@ -30,6 +30,8 @@ public class StartPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start_page);
 
         final Button multiplayerButton = findViewById(R.id.multiplayerButton);
+        final Button soloButton = findViewById(R.id.soloButton);
+
 
 
 
@@ -47,6 +49,15 @@ public class StartPageActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
+
+        soloButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(StartPageActivity.this, HeartsSingleActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
 
     }
 

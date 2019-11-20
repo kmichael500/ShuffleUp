@@ -11,14 +11,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class HeartsLocalActivity extends AppCompatActivity {
-
+public class HeartsSingleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hearts_local);
-
+        setContentView(R.layout.activity_hearts_single);
 
         //displays the cards in a players hand
         final GridView cardListView = findViewById(R.id.cardList);
@@ -47,13 +45,19 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
 
         //gets options for game
-        ArrayList<String> playerNames = getIntent().getExtras().getStringArrayList("PlayerNames");
-        int numOfPlayers = getIntent().getExtras().getInt("numOfPlayers");
-        int playTilPoints = getIntent().getExtras().getInt("playTilPoints");
+//        ArrayList<String> playerNames = getIntent().getExtras().getStringArrayList("PlayerNames");
+//        int numOfPlayers = getIntent().getExtras().getInt("numOfPlayers");
+//        int playTilPoints = getIntent().getExtras().getInt("playTilPoints");
+
+        ArrayList<String> playerNames = new ArrayList<>();
+        playerNames.add("Human 1");
+        playerNames.add("Computer 1");
+        playerNames.add("Computer 2");
+        playerNames.add("Computer 3");
 
 
         //create a game instantiation
-        final Hearts game = new Hearts(numOfPlayers,0, playTilPoints, playerNames);
+        final Hearts game = new Hearts(4,0, 25, playerNames);
 
 
         //Refreshes the screen
@@ -67,6 +71,10 @@ public class HeartsLocalActivity extends AppCompatActivity {
         game.setOnNewPileChangeListener(new OnNewPileListener() {
             @Override
             public void onNewPileChange(boolean newValue) {
+
+                if (game.getCurrentPlayer().getPlayerName().contains("Computer")){
+                    new HeartsComputer().leadCard(game);
+                }
 
                 System.out.println("NEW PILE CHANGE");
                 refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
@@ -85,6 +93,11 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
                 //sends the card to the game
                 game.PlayCard(newChoice);
+
+                if (game.getCurrentPlayer().getPlayerName().contains("Computer")){
+                    new HeartsComputer().playCard(game);
+                }
+
 
                 //refreshes screen
                 refreshScreen(game, cur_suit, playerLabel, roundInfo, cardStringList, PileList, playerScoreStringList,
@@ -137,7 +150,4 @@ public class HeartsLocalActivity extends AppCompatActivity {
         pileListAdapter.notifyDataSetChanged();
 
     }
-
-
-
 }

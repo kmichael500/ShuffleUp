@@ -65,14 +65,12 @@ public class Hearts {
             newRound();
         }
 
-
-
-
         if(listener != null)
         {
             listener.onNewPileChange(newPile);
         }
     }
+    public int getSuit() { return suit};
 
     public int getNumberOfPlayers(){
         return numberOfPlayers;

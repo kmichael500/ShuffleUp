@@ -62,12 +62,6 @@ public class HeartsLocalOptionsActivity extends AppCompatActivity {
                 //clears names if number of players changes
                 nameList.clear();
 
-
-
-
-
-
-
                 //If string equals "", sets number of players to 0
                 if(!numPlayersInput.getText().toString().equals("")){
                     options.numberOfPLayers = Integer.valueOf(numPlayersInput.getText().toString());

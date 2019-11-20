@@ -96,12 +96,12 @@ public class HeartsLocalActivity extends AppCompatActivity {
                         //shows next player's hand
                         grid.setVisibility(View.VISIBLE);
                         nextPlayer.setVisibility(View.GONE);
-
-                        //refreshes screen
-                        refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
-                        playerScoreArrayAdapter, Adapter, pileAdapter, items);
                     }
                 });
+
+                //refreshes screen
+                refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
+                        playerScoreArrayAdapter, Adapter, pileAdapter, items);
             }
         });
 

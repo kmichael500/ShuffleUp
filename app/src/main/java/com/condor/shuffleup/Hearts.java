@@ -78,6 +78,8 @@ public class Hearts {
         return numberOfPlayers;
     }
 
+    public boolean getNewPile() {return newPile;}
+
     public ArrayList<Card> getPile(){
         return pile;
     }

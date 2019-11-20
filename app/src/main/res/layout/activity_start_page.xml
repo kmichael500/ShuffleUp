@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/OffWhite"
     tools:context=".StartPageActivity">
 
     <Button
@@ -14,7 +15,7 @@
         android:background="@drawable/roundedbutton"
         android:text="Solo"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/OffWhite"
         android:textSize="36sp"
         app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
         android:background="@drawable/roundedbutton"
         android:text="Multiplayer"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/OffWhite"
         android:textSize="36sp"
         app:fontFamily="sans-serif"
         app:layout_constraintBottom_toTopOf="@+id/settingsButton"
@@ -50,7 +51,7 @@
         android:background="@drawable/roundedbutton"
         android:text="Settings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/OffWhite"
         android:textSize="36sp"
         app:fontFamily="sans-serif"
         app:layout_constraintBottom_toBottomOf="parent"

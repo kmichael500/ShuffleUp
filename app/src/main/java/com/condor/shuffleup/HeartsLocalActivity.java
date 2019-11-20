@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class HeartsLocalActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,6 @@ public class HeartsLocalActivity extends AppCompatActivity {
         game.setOnNewPileChangeListener(new OnNewPileListener() {
             @Override
             public void onNewPileChange(boolean newValue) {
-                System.out.println("NEW PILE CHANGE");
                 refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
                         playerScoreArrayAdapter, Adapter, pileAdapter, items);
             }
@@ -75,10 +75,8 @@ public class HeartsLocalActivity extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-
                 //Player's choice
                 Card newChoice = game.getCurrentPlayer().getAt(position);
-
                 //sends the card to the game
                 game.PlayCard(newChoice);
 
@@ -98,6 +96,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
                         nextPlayer.setVisibility(View.GONE);
                     }
                 });
+
 
                 //refreshes screen
                 refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
@@ -139,6 +138,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
             int imageResource = getResources().getIdentifier(uri, null, getPackageName());
             pileList.add(imageResource);
         }
+
 
         //Displays the players scores
         playerScoreStringList.clear();

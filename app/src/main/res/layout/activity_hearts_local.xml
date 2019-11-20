@@ -5,8 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkGray"
+    android:background="@color/OffWhite"
     tools:context=".HeartsLocalActivity">
+
+    <TextView
+        android:id="@+id/scoreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Scores"
+        app:layout_constraintBottom_toTopOf="@+id/playerScores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
 
     <GridView
         android:id="@+id/cardList"
@@ -15,7 +29,9 @@
         android:numColumns="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" >
+
+    </GridView>
 
     <TextView
         android:id="@+id/playerLabel"
@@ -39,9 +55,12 @@
         android:layout_height="23dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="528dp"
         android:text=" "
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -69,7 +88,15 @@
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
         android:layout_marginTop="40dp"
+        android:background="@drawable/pile_boarder"
+        android:clipToPadding="false"
+        android:gravity="center"
         android:numColumns="2"
+        android:padding="30sp"
+        android:paddingLeft="30sp"
+        android:paddingTop="30sp"
+        android:paddingRight="30sp"
+        android:paddingBottom="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/cardList"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roundInfo"
@@ -82,22 +109,27 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp"
         android:numColumns="2"
         app:layout_constraintBottom_toTopOf="@+id/roundInfo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041"></GridView>
+        app:layout_constraintVertical_bias="0.041">
+
+    </GridView>
+
     <Button
         android:id="@+id/nextPlayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
-        android:text="Show next hand"
+        android:background="@drawable/roundedbutton"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:text="Show Next Hand"
+        android:textAllCaps="false"
+        android:textColor="@color/OffWhite"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/OffWhite"
     tools:context=".HeartsLocalOptionsActivity">
+
 
     <Button
         android:id="@+id/startLocalHeartsGame"
@@ -14,7 +16,7 @@
         android:background="@drawable/roundedbutton"
         android:text="Start"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/OffWhite"
         android:textSize="36sp"
         app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +36,7 @@
         android:layout_marginBottom="8dp"
         android:text="Enter Number of Players"
         android:textSize="20sp"
+        app:fontFamily="sans-serif"
         app:layout_constraintBottom_toTopOf="@+id/numOfPlayers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.318"
@@ -53,6 +56,7 @@
         android:ems="10"
         android:hint="4"
         android:inputType="number"
+        app:fontFamily="sans-serif"
         app:layout_constraintBottom_toTopOf="@+id/playTilPointsLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.202"
@@ -70,6 +74,7 @@
         android:ems="10"
         android:hint="50"
         android:inputType="number"
+        app:fontFamily="sans-serif"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/PlayerNamesLabel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +91,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="20dp"
         android:text="Enter Player Names"
+        app:fontFamily="sans-serif"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/dynamicNames"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,6 +108,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="Enter Ending Ponts"
+        app:fontFamily="sans-serif"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/playTilPoints"
         app:layout_constraintEnd_toEndOf="parent"

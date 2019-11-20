@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Button;
 import java.util.ArrayList;
 
 public class HeartsLocalActivity extends AppCompatActivity {
@@ -40,9 +41,17 @@ public class HeartsLocalActivity extends AppCompatActivity {
         final TextView roundInfo = findViewById(R.id.roundInfo);     //Displays round info
         final TextView playerLabel = findViewById(R.id.playerLabel); //Displays Player number
 
+        //Button to control turns
+        final Button nextPlayer = findViewById(R.id.nextPlayer);
+
+
+        //gets options for game
+        ArrayList<String> playerNames = getIntent().getExtras().getStringArrayList("PlayerNames");
+        int numOfPlayers = getIntent().getExtras().getInt("numOfPlayers");
+        int playTilPoints = getIntent().getExtras().getInt("playTilPoints");
 
         //create a game instantiation
-        final Hearts game = new Hearts(4,0, 15);
+        final Hearts game = new Hearts(numOfPlayers,0, playTilPoints, playerNames);
 
         //Refreshes the screen
         refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
@@ -73,9 +82,24 @@ public class HeartsLocalActivity extends AppCompatActivity {
                 //sends the card to the game
                 game.PlayCard(newChoice);
 
-                //refreshes screen
-                refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
+                //hides the cards until button to show next hand is pressed
+                if(game.isValidPlay(newChoice)){
+                    cardListView.setVisibility(View.GONE);
+                }
+
+                //When the next player clicks the button, their hand is shown
+                nextPlayer.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        //shows next player's hand
+                        cardListView.setVisibility(View.VISIBLE);
+
+                        //refreshes screen
+                        refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
                         playerScoreArrayAdapter, Adapter, pileAdapter, items);
+                    }
+                });
             }
         });
 
@@ -97,7 +121,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
         pileText.setText(game.getRoundInfo());
 
         //Display the current player
-        playerLabel.setText("Player's " + (game.getPlayerNumber()+1) + " Hand");
+        playerLabel.setText(game.getCurrentPlayer().getPlayerName() + "'s Hand");
 
         CardList.clear();
         for (int i = 0; i<game.getCurrentPlayer().getHand().size(); i++){
@@ -117,7 +141,7 @@ public class HeartsLocalActivity extends AppCompatActivity {
         //Displays the players scores
         playerScoreStringList.clear();
         for (int i = 0; i< game.getNumberOfPlayers(); i++){
-            playerScoreStringList.add("Player " + (i+1) + ": " + game.getPlayers().get(i).getScore());
+            playerScoreStringList.add(game.getPlayers().get(i).getPlayerName() + ": " + game.getPlayers().get(i).getScore());
         }
 
         //Notifies the adapters of data change

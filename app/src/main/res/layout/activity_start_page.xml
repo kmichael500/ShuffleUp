@@ -86,5 +86,5 @@
         app:layout_constraintBottom_toTopOf="@+id/soloButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/shuffle_up_logo" />
+        app:srcCompat="@drawable/ic_shuffleup_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

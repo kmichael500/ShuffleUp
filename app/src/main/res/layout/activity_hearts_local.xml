@@ -38,7 +38,6 @@
         android:layout_width="144dp"
         android:layout_height="23dp"
         android:layout_marginStart="16dp"
-
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="528dp"
         android:text=" "
@@ -92,5 +91,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.041"></GridView>
+    <Button
+        android:id="@+id/nextPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Show next hand"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

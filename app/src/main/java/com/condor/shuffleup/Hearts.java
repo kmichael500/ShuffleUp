@@ -38,14 +38,14 @@ public class Hearts {
             ACE = 14;
 
     //set up the game
-    Hearts(int playerCount, int mode, int playTilPoints){
+    Hearts(int playerCount, int mode, int playTilPoints, ArrayList<String> playerNameList){
         numberOfPlayers = playerCount;
         gamemode = mode;
         turnNumber = 0;
         this.playTilPoints = playTilPoints;
 
         for (int i = 0; i<numberOfPlayers; i++){
-            players.add(new Player());
+            players.add(new Player(playerNameList.get(i)));
         }
 
         newRound();
@@ -122,19 +122,24 @@ public class Hearts {
             return ("Pile\n" + "(Round " + (currentRound) + ")" );
         }
         else {
-            return ("Game Over\n Player " + this.getWinner() + " won the game");
+            return ("Game Over\n" + this.getWinner() + " won the game");
         }
     }
 
     //determines the winner of the game
-    private int getWinner(){
+    private String getWinner(){
         ArrayList<Integer> highestScoreList = new ArrayList<>();
         for (int i = 0; i<numberOfPlayers; i++){
             highestScoreList.add(players.get(i).getScore());
         }
 
-        int player = highestScoreList.indexOf(Collections.min(highestScoreList));
-        return player+1;
+        for (int i = 0; i<numberOfPlayers; i++){
+            if (players.get(i).getScore() == Collections.min(highestScoreList)){
+                return players.get(i).getPlayerName();
+            }
+        }
+
+        return "Error";
     }
 
     //Gets the number of cards a the current player has left
@@ -202,7 +207,7 @@ public class Hearts {
                     currentPlayer = startPlayer;
                     suit = CLUBS;
                     setNewPile(true);
-                    turnInfo = "Player " + (startPlayer+1) + " leads";
+                    turnInfo = (getCurrentPlayer().getPlayerName()) + " leads";
                     newRound = true;
                 }
             }
@@ -225,7 +230,7 @@ public class Hearts {
     }
 
     //Checks if a card is a valid play
-    private boolean isValidPlay(Card choice){
+    protected boolean isValidPlay(Card choice){
 
         //makes sure the two of clubs is played at the beginning of a round
         if (newRound){
@@ -236,6 +241,7 @@ public class Hearts {
             else{
                 return false;
             }
+
         }
 
 
@@ -321,7 +327,7 @@ public class Hearts {
             turnNumber = 0;
             pile.clear();
             pileMap.clear();
-            turnInfo = "Player " + (currentPlayer+1) + " turn";
+            turnInfo = (getCurrentPlayer().getPlayerName()) + " leads";
             setNewPile(true);
 
         }

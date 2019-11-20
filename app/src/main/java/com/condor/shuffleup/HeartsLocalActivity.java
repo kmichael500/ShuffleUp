@@ -90,7 +90,9 @@ public class HeartsLocalActivity extends AppCompatActivity {
                 game.PlayCard(newChoice);
 
                 //hides the cards until button to show next hand is pressed
-                cardListView.setVisibility(View.GONE);
+                if(game.isValidPlay(newChoice)){
+                    cardListView.setVisibility(View.GONE);
+                }
 
                 //When the next player clicks the button, their hand is shown
                 nextPlayer.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,8 @@
 package com.condor.shuffleup;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -84,6 +86,11 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
                 //hides the cards until button to show next hand is pressed
                 if(game.isValidPlay(newChoice)){
+                    //Fade in animation
+                    ObjectAnimator fadeIn = ObjectAnimator.ofFloat(nextPlayer, "alpha", 0f, 1f);
+                    fadeIn.setDuration(500);
+                    fadeIn.start();
+
                     grid.setVisibility(View.GONE);
                     nextPlayer.setVisibility(View.VISIBLE);
                 }else{
@@ -96,6 +103,10 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(View v) {
+                        //Fade in animation
+                        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(grid, "alpha", 0f, 1f);
+                        fadeIn.setDuration(500);
+                        fadeIn.start();
                         //shows next player's hand
                         grid.setVisibility(View.VISIBLE);
                         nextPlayer.setVisibility(View.GONE);
@@ -150,6 +161,8 @@ public class HeartsLocalActivity extends AppCompatActivity {
         for (int i = 0; i< game.getNumberOfPlayers(); i++){
             playerScoreStringList.add(game.getPlayers().get(i).getPlayerName() + ": " + game.getPlayers().get(i).getScore());
         }
+
+
 
         //Notifies the adapters of data change
         playerScoreArrayAdapter.notifyDataSetChanged();

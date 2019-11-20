@@ -85,10 +85,12 @@
     <GridView
         android:id="@+id/cardPile"
         android:layout_width="293dp"
-        android:layout_height="267dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
+        android:layout_height="283dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/pile_boarder"
         android:clipToPadding="false"
         android:gravity="center"
@@ -99,6 +101,7 @@
         android:paddingRight="30sp"
         android:paddingBottom="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/cardList"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roundInfo"
         app:layout_constraintVertical_bias="0.034" />

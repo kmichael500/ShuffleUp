@@ -27,6 +27,8 @@ public class HeartsLocalActivity extends AppCompatActivity {
         final  GridView grid = findViewById(R.id.cardList);
         final CustomGridAdapter Adapter = new CustomGridAdapter(this, items);
         grid.setAdapter(Adapter);
+        grid.setVisibility(View.GONE);
+
 
         //displays user scores
         final GridView playerScoreGridView = findViewById(R.id.playerScores);
@@ -48,7 +50,6 @@ public class HeartsLocalActivity extends AppCompatActivity {
 
         //Button to control turns
         final Button nextPlayer = findViewById(R.id.nextPlayer);
-        nextPlayer.setVisibility(View.GONE);
 
         //gets options for game
         ArrayList<String> playerNames = getIntent().getExtras().getStringArrayList("PlayerNames");
@@ -74,6 +75,21 @@ public class HeartsLocalActivity extends AppCompatActivity {
             }
         });
 
+        //When the next player clicks the button, their hand is shown
+        nextPlayer.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //Fade in animation
+                ObjectAnimator fadeIn = ObjectAnimator.ofFloat(grid, "alpha", 0f, 1f);
+                fadeIn.setDuration(500);
+                fadeIn.start();
+
+                //shows next player's hand
+                grid.setVisibility(View.VISIBLE);
+                nextPlayer.setVisibility(View.GONE);
+            }
+        });
 
         //When a player clicks a card, it sends that choice to the hearts game class
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,23 +112,6 @@ public class HeartsLocalActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(HeartsLocalActivity.this, "Cannot play this card"  , Toast.LENGTH_LONG).show();
                 }
-
-
-                //When the next player clicks the button, their hand is shown
-                nextPlayer.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        //Fade in animation
-                        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(grid, "alpha", 0f, 1f);
-                        fadeIn.setDuration(500);
-                        fadeIn.start();
-                        //shows next player's hand
-                        grid.setVisibility(View.VISIBLE);
-                        nextPlayer.setVisibility(View.GONE);
-                    }
-                });
-
 
                 //refreshes screen
                 refreshScreen(game, cur_suit, playerLabel, roundInfo, PileList, playerScoreStringList,
